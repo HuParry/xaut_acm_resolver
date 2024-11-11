@@ -376,18 +376,13 @@ function processGhost2Resolver(ghost) {
     return JSON.stringify(data, null, 4);
 }
 
-const fs = require('fs');
-const path = require('path');
-
 function write2Data(content) {
-    const filePath = path.join(__dirname, 'data/contest.json');
-    // 使用异步方法写入文件
-    fs.writeFile(filePath, content, (err) => {
+    writeFile('data/contest.json', content, 'utf-8', (err) => {
         if (err) {
-            console.error('写入文件时出错:', err);
+            console.error(err);
             return;
         }
-        console.log('文件已成功写入:', filePath);
+        // 文件写入完成
     });
 }
 
@@ -395,17 +390,16 @@ function loadData() {
     clearCache();
 
     const ghost = $('#input-data').val().trim();
-
     const input = processGhost2Resolver(ghost);
-    write2Data(input);
 
-    // if (isUrl(input)) {
-    //     console.log(`load data from url. [url=${input}]`);
-    //     $.getJSON(input, function(data) {
-    //         processData(data);
-    //     });
-    // } else
-    {
+    // write2Data(input);   // 文件写入，暂时不会实现，后续再实现
+
+    if (isUrl(input)) {
+        console.log(`load data from url. [url=${input}]`);
+        $.getJSON(input, function(data) {
+            processData(data);
+        });
+    } else {
         console.log(`load data from json content. [length=${input.length}]`)
         const data = JSON.parse(input);
         processData(data);

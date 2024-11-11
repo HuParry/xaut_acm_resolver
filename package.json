@@ -7,6 +7,10 @@
     "engines": {
         "node": ">=16.11.0"
     },
+    "browser": {
+        "fs": false,
+        "path": false
+    },
     "scripts": {
         "start": "superstatic serve . --port 8080 --host 10.50.40.9"
     },
