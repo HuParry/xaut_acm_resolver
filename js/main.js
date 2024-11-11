@@ -337,18 +337,21 @@ function processGhost2Resolver(ghost) {
 
     data.contest_name = lines[0].split('"')[1].split('"')[0];
     data.problem_count = parseInt(lines[2].split(' ')[1]);
-    data.frozen_seconds = 3600 * 2;
+    data.frozen_seconds = 3600 * 4;
     data.teams = parseInt(lines[3].split(' ')[1]);
     data.submissions = parseInt(lines[4].split(' ')[1]);
     data.users = {};
 
     for (let i = 5 + data.problem_count; i < 5 + data.problem_count + data.teams; i++) {
         const team = lines[i].match(/@t (\d+),\d+,\d+,(.*)/);
+        college = team[2].split('-')[0]
+        if (college == 'Unknown School')
+            college = '西安理工大学'
         data.users[team[1]] = {
             name: team[2].split('-')[1],
-            college: team[2].split('-')[0],
+            college: college,
             is_exclude: false
-        };
+        }
     }
 
     data.solutions = {};
