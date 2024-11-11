@@ -330,14 +330,14 @@ function processData(data) {
     };
 }
 
-function processGhost2Resolver(ghost) {
+function processGhost2Resolver(ghost, time) {
     const frozenSeconds = 60 * 60;
     const data = {};
     const lines = ghost.split('\n');
 
     data.contest_name = lines[0].split('"')[1].split('"')[0];
     data.problem_count = parseInt(lines[2].split(' ')[1]);
-    data.frozen_seconds = 3600 * 4;
+    data.frozen_seconds = 3600 * parseInt(time);
     data.teams = parseInt(lines[3].split(' ')[1]);
     data.submissions = parseInt(lines[4].split(' ')[1]);
     data.users = {};
@@ -393,7 +393,8 @@ function loadData() {
     clearCache();
 
     const ghost = $('#input-data').val().trim();
-    const input = processGhost2Resolver(ghost);
+    const frozen_time = $('#input-time').val().trim();
+    const input = processGhost2Resolver(ghost, frozen_time);
 
     // write2Data(input);   // 文件写入，暂时不会实现，后续再实现
 
@@ -422,7 +423,7 @@ function loadDataNeedDoubleCheck() {
 }
 
 function loadExampleData() {
-    if (confirm('确定要加载上次数据吗？')) {
+    if (confirm('确定要加载示例数据吗？')) {
         const url = `${window.location.href}/data/contest.json`;
 
         console.log(`load data from url. [url=${url}]`);

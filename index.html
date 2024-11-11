@@ -57,7 +57,13 @@
         <footer class="footer">
             <div class="container clearfix">
                 <p class="text-muted pull-left">
-                    <textarea id="input-data" cols="100" rows="1" placeholder="请粘贴导出的ghost文件内容..."></textarea>
+                    封榜时间(小时)：
+                </p>
+                <p class="text-muted pull-left">
+                    <textarea id="input-time" type="text" oninput="this.value=this.value.replace(/[^0-9]/g, '')"  cols="5" rows="1" placeholder="4"></textarea>
+                </p>
+                <p class="text-muted pull-left">
+                    <textarea id="input-data" cols="90" rows="1" placeholder="请粘贴导出的ghost文件内容..."></textarea>
                 </p>
                 <p class="text-muted pull-left" style="margin-left: 10px;">
                     <button onclick="loadDataNeedDoubleCheck()">加载数据</button>
