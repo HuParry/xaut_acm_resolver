@@ -399,13 +399,13 @@ function loadData() {
     const input = processGhost2Resolver(ghost);
     write2Data(input);
 
-
-    if (isUrl(input)) {
-        console.log(`load data from url. [url=${input}]`);
-        $.getJSON(input, function(data) {
-            processData(data);
-        });
-    } else {
+    // if (isUrl(input)) {
+    //     console.log(`load data from url. [url=${input}]`);
+    //     $.getJSON(input, function(data) {
+    //         processData(data);
+    //     });
+    // } else
+    {
         console.log(`load data from json content. [length=${input.length}]`)
         const data = JSON.parse(input);
         processData(data);
